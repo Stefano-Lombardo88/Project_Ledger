@@ -7,6 +7,7 @@ public class Spesa {
     private String descrizione;
     private LocalDate data;
     private BigDecimal importo;
+    private Long idSpesa;
 
     public Spesa(String descrizione, LocalDate data, BigDecimal importo) {
         this.descrizione = descrizione;
@@ -41,12 +42,21 @@ public class Spesa {
         this.importo = importo;
     }
 
+    public Long getIdSpesa() {
+        return idSpesa;
+    }
+
+    public void setIdSpesa(Long idSpesa) {
+        this.idSpesa = idSpesa;
+    }
+
     @Override
     public String toString() {
         return "Spesa{" +
-                "descrizione='" + descrizione + '\'' +
-                ", data=" + data +
-                ", importo=" + importo +
+                "idSpesa= " + idSpesa +
+                ", descrizione= '" + descrizione + '\'' +
+                ", data= " + data +
+                ", importo= " + importo +
                 '}';
     }
 }
