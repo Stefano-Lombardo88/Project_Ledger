@@ -1,14 +1,18 @@
 package com.example.project_ledger.service;
 
 import com.example.project_ledger.model.Spesa;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class SpesaService {
     private List<Spesa> speseList = new ArrayList<>();
     private long contatore = 0;
+
+    public SpesaService() {}
 
     public void aggiungiSpesa(Spesa spesa) {
         contatore += 1;
