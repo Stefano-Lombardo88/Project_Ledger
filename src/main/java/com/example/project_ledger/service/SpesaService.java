@@ -25,7 +25,7 @@ public class SpesaService {
     }
 
     public List<Spesa> getSpeseList() {
-        return speseList;
+        return List.copyOf(speseList);
     }
 
     public Spesa rimuoviSpesa(Long idSpesa) {
