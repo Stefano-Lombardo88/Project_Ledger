@@ -12,8 +12,6 @@ public class SpesaService {
     private List<Spesa> speseList = new ArrayList<>();
     private long contatore = 0;
 
-    public SpesaService() {}
-
     public void aggiungiSpesa(Spesa spesa) {
         contatore += 1;
         spesa.setIdSpesa(contatore);
