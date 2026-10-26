@@ -1,43 +1,44 @@
 package com.example.project_ledger.service;
 
 import com.example.project_ledger.model.Spesa;
+import com.example.project_ledger.repository.SpesaRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SpesaService {
-    private List<Spesa> speseList = new ArrayList<>();
-    private long contatore = 0;
+
+    private final SpesaRepository spesaRepository;
+
+    public SpesaService(SpesaRepository spesaRepository) {
+        this.spesaRepository = spesaRepository;
+    }
 
     public void aggiungiSpesa(Spesa spesa) {
-        contatore += 1;
-        spesa.setIdSpesa(contatore);
-        speseList.add(spesa);
+        spesaRepository.save(spesa);
     }
 
     public BigDecimal calcolaTotale() {
-        BigDecimal totale = BigDecimal.ZERO;
-        for (Spesa spesa : speseList) {
-            totale = totale.add(spesa.getImporto());
-        }
+        List<Spesa> spese = spesaRepository.findAll();
+        BigDecimal totale = spese.stream()
+                .map(Spesa::getImporto)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
         return totale;
     }
 
     public List<Spesa> getSpeseList() {
-        return List.copyOf(speseList);
+        return spesaRepository.findAll();
     }
 
     public Spesa rimuoviSpesa(Long idSpesa) {
         Spesa spesaRimossa = null;
-        for (Spesa spesa : speseList) {
-            if (spesa.getIdSpesa().equals(idSpesa)) {
-                spesaRimossa = spesa;
-                speseList.remove(spesa);
-                break;
-            }
+        Optional<Spesa> risultato = spesaRepository.findById(idSpesa);
+        if (risultato.isPresent()){
+            spesaRimossa = risultato.get();
+            spesaRepository.deleteById(idSpesa);
         }
         return spesaRimossa;
     }
