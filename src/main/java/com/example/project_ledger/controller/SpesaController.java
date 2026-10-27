@@ -24,7 +24,6 @@ public class SpesaController {
 
     @PostMapping("/spese")
     public Spesa createSpesa(@RequestBody Spesa spesa) {
-        spesaService.aggiungiSpesa(spesa);
-        return spesa;
+        return spesaService.aggiungiSpesa(spesa);
     }
 }

@@ -17,8 +17,8 @@ public class SpesaService {
         this.spesaRepository = spesaRepository;
     }
 
-    public void aggiungiSpesa(Spesa spesa) {
-        spesaRepository.save(spesa);
+    public Spesa aggiungiSpesa(Spesa spesa) {
+        return spesaRepository.save(spesa);
     }
 
     public BigDecimal calcolaTotale() {
@@ -36,7 +36,7 @@ public class SpesaService {
     public Spesa rimuoviSpesa(Long idSpesa) {
         Spesa spesaRimossa = null;
         Optional<Spesa> risultato = spesaRepository.findById(idSpesa);
-        if (risultato.isPresent()){
+        if (risultato.isPresent()) {
             spesaRimossa = risultato.get();
             spesaRepository.deleteById(idSpesa);
         }
