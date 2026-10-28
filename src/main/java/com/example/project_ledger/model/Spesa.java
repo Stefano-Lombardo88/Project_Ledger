@@ -1,13 +1,23 @@
 package com.example.project_ledger.model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Spesa {
     private String descrizione;
     private LocalDate data;
     private BigDecimal importo;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idSpesa;
+
+    protected Spesa() {}
 
     public Spesa(String descrizione, LocalDate data, BigDecimal importo) {
         this.descrizione = descrizione;

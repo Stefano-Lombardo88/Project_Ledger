@@ -1,3 +1,11 @@
 spring:
   application:
     name: Project_Ledger
+  datasource:
+    url: jdbc:mysql://localhost:3306/project_ledger
+    username: root
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update

@@ -2,6 +2,8 @@ package com.example.project_ledger.controller;
 
 import com.example.project_ledger.model.Spesa;
 import com.example.project_ledger.service.SpesaService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +25,8 @@ public class SpesaController {
     }
 
     @PostMapping("/spese")
-    public Spesa createSpesa(@RequestBody Spesa spesa) {
-        spesaService.aggiungiSpesa(spesa);
-        return spesa;
+    public ResponseEntity<Spesa> createSpesa(@RequestBody Spesa spesa) {
+        Spesa salvata = spesaService.aggiungiSpesa(spesa);
+        return ResponseEntity.status(HttpStatus.CREATED).body(salvata);
     }
 }
