@@ -4,10 +4,7 @@ import com.example.project_ledger.model.Spesa;
 import com.example.project_ledger.service.SpesaService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,6 +19,11 @@ public class SpesaController {
     @GetMapping("/spese")
     public List<Spesa> getSpese() {
         return spesaService.getSpeseList();
+    }
+
+    @GetMapping("/spese/{id}")
+    public Spesa getSpesa(@PathVariable Long id) {
+        return spesaService.getSpesaById(id);
     }
 
     @PostMapping("/spese")
