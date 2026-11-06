@@ -1,5 +1,6 @@
 package com.example.project_ledger.service;
 
+import com.example.project_ledger.exception.SpesaNonTrovataException;
 import com.example.project_ledger.model.Spesa;
 import com.example.project_ledger.repository.SpesaRepository;
 import org.springframework.stereotype.Service;
@@ -41,5 +42,10 @@ public class SpesaService {
             spesaRepository.deleteById(idSpesa);
         }
         return spesaRimossa;
+    }
+
+    public Spesa getSpesaById(Long idSpesa) {
+        return spesaRepository.findById(idSpesa)
+                .orElseThrow(() -> new SpesaNonTrovataException("Spesa con id " + idSpesa + " non trovata"));
     }
 }
