@@ -37,4 +37,10 @@ public class SpesaController {
                 .toUri();
         return ResponseEntity.created(location).body(salvata);
     }
+
+    @DeleteMapping("/spese/{id}")
+    public ResponseEntity<Void> deleteSpesa(@PathVariable Long id) {
+        spesaService.rimuoviSpesa(id);
+        return ResponseEntity.noContent().build();
+    }
 }

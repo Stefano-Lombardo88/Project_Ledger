@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SpesaService {
@@ -34,14 +33,9 @@ public class SpesaService {
         return spesaRepository.findAll();
     }
 
-    public Spesa rimuoviSpesa(Long idSpesa) {
-        Spesa spesaRimossa = null;
-        Optional<Spesa> risultato = spesaRepository.findById(idSpesa);
-        if (risultato.isPresent()) {
-            spesaRimossa = risultato.get();
-            spesaRepository.deleteById(idSpesa);
-        }
-        return spesaRimossa;
+    public void rimuoviSpesa(Long idSpesa) {
+        Spesa spesa = getSpesaById(idSpesa);
+        spesaRepository.delete(spesa);
     }
 
     public Spesa getSpesaById(Long idSpesa) {
