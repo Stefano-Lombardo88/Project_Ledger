@@ -1,5 +1,6 @@
 package com.example.project_ledger.controller;
 
+import com.example.project_ledger.dto.NuovaSpesaRequest;
 import com.example.project_ledger.model.Spesa;
 import com.example.project_ledger.service.SpesaService;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,8 @@ public class SpesaController {
     }
 
     @PostMapping("/spese")
-    public ResponseEntity<Spesa> createSpesa(@RequestBody Spesa spesa) {
+    public ResponseEntity<Spesa> createSpesa(@RequestBody NuovaSpesaRequest spesaDto) {
+        Spesa spesa = new Spesa(spesaDto.descrizione(), spesaDto.data(), spesaDto.importo());
         Spesa salvata = spesaService.aggiungiSpesa(spesa);
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
