@@ -3,6 +3,7 @@ package com.example.project_ledger.controller;
 import com.example.project_ledger.dto.NuovaSpesaRequest;
 import com.example.project_ledger.model.Spesa;
 import com.example.project_ledger.service.SpesaService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -29,7 +30,7 @@ public class SpesaController {
     }
 
     @PostMapping("/spese")
-    public ResponseEntity<Spesa> createSpesa(@RequestBody NuovaSpesaRequest spesaDto) {
+    public ResponseEntity<Spesa> createSpesa(@Valid @RequestBody NuovaSpesaRequest spesaDto) {
         Spesa spesa = new Spesa(spesaDto.descrizione(), spesaDto.data(), spesaDto.importo());
         Spesa salvata = spesaService.aggiungiSpesa(spesa);
         URI location = ServletUriComponentsBuilder
